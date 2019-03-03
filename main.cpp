@@ -12,7 +12,9 @@ int main() {
 
     x1 = {5, 4, 3, 2};
 
-    z = dft(x1, 4);
-    w = idft(z);
+    z = basic::dft(x1, 4);
+    w = basic::idft(z);
+
+    utils::printSeq(w);
     return 0;
 }
