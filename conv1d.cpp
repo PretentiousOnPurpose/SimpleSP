@@ -5,9 +5,10 @@
 using std::vector;
 using namespace std;
 
+
 vector<float> conv1d(vector<float> x1, vector<float> x2) {
     int LEN_CONV_SEQ = x1.size() + x2.size() - 1;
-
+    
     vector<float> y;
     y.reserve(LEN_CONV_SEQ);
 
@@ -17,5 +18,6 @@ vector<float> conv1d(vector<float> x1, vector<float> x2) {
             y[i] += x1[j] * x2[i - j];
         }
     }
+
     return y;
 }

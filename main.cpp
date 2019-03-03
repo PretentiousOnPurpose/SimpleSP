@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <complex.h>
 #include "func.hpp"
 
 using std::vector;
@@ -7,12 +8,11 @@ using namespace std;
 
 int main() {
 
-    vector<float> y, x1, x2;
+    vector<complex<float>> z, w, x1;
 
-    x1 = {1, 1, 1, 1, 1};
-    x2 = {1, 1};
+    x1 = {5, 4, 3, 2};
 
-    y = conv1d(x1, x2);
-
+    z = dft(x1, 4);
+    w = idft(z);
     return 0;
 }
