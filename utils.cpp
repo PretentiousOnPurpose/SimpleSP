@@ -1,7 +1,7 @@
 #include <iostream>
 #include <complex.h>
 #include <vector>
-#include "func.hpp"
+#include "dsp.hpp"
 using std::vector;
 using namespace std;
 
