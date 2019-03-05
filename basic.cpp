@@ -28,7 +28,8 @@ namespace basic {
         vector<complex<float>> y;
 
         if (x.size() < N) {
-            for (int i = 0; i < (N - x.size()); i++) {
+            int tmp = x.size();
+            for (int i = 0; i < (N - tmp); i++) {
                 x.push_back(complex<float>{0, 0});
             }
         }
@@ -50,7 +51,8 @@ namespace basic {
         vector<complex<float>> y;
 
         if (x.size() < N) {
-            for (int i = 0; i < (N - x.size()); i++) {
+            int tmp = x.size();
+            for (int i = 0; i < (N - tmp); i++) {
                 x.push_back(complex<float>{0, 0});
             }
         }
@@ -67,33 +69,36 @@ namespace basic {
 
     vector<complex<float>> fft(vector<complex<float>> & x, int N) {
         complex<float> tmp;
-        int D = log2(N), div1 = N/2;
+        const int D = log2(N);
 
         vector<complex<float>> y, tmp1, tmp2;
 
         if (x.size() < N) {
-            for (int i = 0; i < (N - x.size()); i++) {
+            int tmp = x.size();
+            for (int i = 0; i < (N - tmp); i++) {
                 x.push_back(complex<float>{0, 0});
             }
         }
 
         // Even Samples 
-
-        for (int i = 0; i < pow(2, (D-2)); i = i + 2) {
-            tmp = {x[i], x[i+pow(2, (D-1))]};
-            y.insert(end(y), begin(tmp), end(tmp));
+        for (int j = 0; j < pow(2, (D-2)); j = j + 2) {
+            for (int i = 0 + j; i <= pow(2, (D-2)) + j; i = i + 2) {
+                tmp1 = {x[i + i * pow(2, (D-2))], x[i + i * pow(2, (D-2)) + pow(2, (D-1))]};
+                tmp2 = dft(tmp1, 2);
+                y.insert(end(y), begin(tmp2), end(tmp2));
+            }
         }
 
         // Odd Samples
-
-        for (int i = 0; i < pow(2, (D-2)); i = i + 2) {
-            tmp = {x[i+1], x[i + 1 + pow(2, (D-1))]};
-            y.insert(end(y), begin(tmp), end(tmp));
+        for (int j = 0; j < pow(2, (D-3)); j = j + 2) {
+            for (int i = 0 + j; i <= pow(2, (D-2)) + j; i = i + 2) {
+                tmp1 = {x[1 + i + i * pow(2, (D-2))], x[1 + i + i * pow(2, (D-2)) + pow(2, (D-1))]};
+                tmp2 = dft(tmp1, 2);
+                y.insert(end(y), begin(tmp2), end(tmp2));
+            }
         }
-
-        for (int i = 0; i < D-1; i++) {
-            
-        }
+        
+        // Rest D-1 Stages
 
         return y;   
     }

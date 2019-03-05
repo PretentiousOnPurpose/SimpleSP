@@ -10,11 +10,11 @@ int main() {
 
     vector<complex<float>> z, x1;
 
-    x1 = {1, 101, 1};
+    x1 = {1, 1, 1, 1};
 
+    z = basic::dft(x1, 4);
 
-    z = basic::dft(x1, 8);
-
+    utils::printSeq(x1);
     utils::printSeq(z);
 
     return 0;

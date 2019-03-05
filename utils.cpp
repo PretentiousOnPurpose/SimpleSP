@@ -8,7 +8,7 @@ using namespace std;
 namespace utils {
     void printSeq(vector<float> & y) {
         cout.precision(3);
-        for (int i = 0; i < y.capacity(); i++) {
+        for (int i = 0; i < y.size(); i++) {
             cout << y[i] << " ";
         }
         cout << endl;
@@ -16,7 +16,7 @@ namespace utils {
 
     void printSeq(vector<complex<float>> & y) {
         cout.precision(3);
-        for (int i = 0; i < y.capacity(); i++) {
+        for (int i = 0; i < y.size(); i++) {
             cout << y[i] << " ";
         }
         cout << endl;
