@@ -65,5 +65,37 @@ namespace basic {
         return y;
     }
 
+    vector<complex<float>> fft(vector<complex<float>> & x, int N) {
+        complex<float> tmp;
+        int D = log2(N), div1 = N/2;
+
+        vector<complex<float>> y, tmp1, tmp2;
+
+        if (x.size() < N) {
+            for (int i = 0; i < (N - x.size()); i++) {
+                x.push_back(complex<float>{0, 0});
+            }
+        }
+
+        // Even Samples 
+
+        for (int i = 0; i < pow(2, (D-2)); i = i + 2) {
+            tmp = {x[i], x[i+pow(2, (D-1))]};
+            y.insert(end(y), begin(tmp), end(tmp));
+        }
+
+        // Odd Samples
+
+        for (int i = 0; i < pow(2, (D-2)); i = i + 2) {
+            tmp = {x[i+1], x[i + 1 + pow(2, (D-1))]};
+            y.insert(end(y), begin(tmp), end(tmp));
+        }
+
+        for (int i = 0; i < D-1; i++) {
+            
+        }
+
+        return y;   
+    }
 
 };
