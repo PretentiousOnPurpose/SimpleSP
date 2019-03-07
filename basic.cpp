@@ -79,28 +79,25 @@ namespace basic {
                 x.push_back(complex<float>{0, 0});
             }
         }
+        return fftCompute(y, N);   
+    }
 
-        // Even Samples 
-        for (int j = 0; j < pow(2, (D-2)); j = j + 2) {
-            for (int i = 0 + j; i <= pow(2, (D-2)) + j; i = i + 2) {
-                tmp1 = {x[i + i * pow(2, (D-2))], x[i + i * pow(2, (D-2)) + pow(2, (D-1))]};
-                tmp2 = dft(tmp1, 2);
-                y.insert(end(y), begin(tmp2), end(tmp2));
-            }
+    vector<complex<float>> fftCompute(vector<complex<float>> & x, int N) {
+        vector<complex<float>> tmp1, tmp2;
+        if (N == 2) {
+            return dft(x, N);
         }
+        tmp1 = vector<complex<float>>(x.begin() + 1, x.begin() + N/2);
+        tmp2 = vector<complex<float>>(x.begin() + N/2 + 1, x.begin() + N);
+        return fftCompute(tmp1 , N/2) + dot(twiddle(N), fftCompute(tmp2 , N/2));
+    }
 
-        // Odd Samples
-        for (int j = 0; j < pow(2, (D-3)); j = j + 2) {
-            for (int i = 0 + j; i <= pow(2, (D-2)) + j; i = i + 2) {
-                tmp1 = {x[1 + i + i * pow(2, (D-2))], x[1 + i + i * pow(2, (D-2)) + pow(2, (D-1))]};
-                tmp2 = dft(tmp1, 2);
-                y.insert(end(y), begin(tmp2), end(tmp2));
-            }
+    vector<complex<float>> twiddle(int N) {
+        vector<complex<float>> y;
+        for (int i = 0; i < N; i++) {
+            y.push_back(complex<float>(cos(2 * M_PI * i / N), sin(2 * M_PI * i / N)));
         }
-        
-        // Rest D-1 Stages
-
-        return y;   
+        return y;
     }
 
 };

@@ -10,9 +10,9 @@ int main() {
 
     vector<complex<float>> z, x1;
 
-    x1 = {1, 1, 1, 1};
+    x1 = {1, 1, 1, 1, 1, 1, 1, 1};
 
-    z = basic::dft(x1, 4);
+    z = utils::fft(x1);
 
     utils::printSeq(x1);
     utils::printSeq(z);
