@@ -83,14 +83,18 @@ namespace basic {
     vector<complex<float>> twiddle(int N) {
         vector<complex<float>> y;
         for (int i = 0; i < N; i++) {
-            y.push_back(complex<float>(cos(2 * M_PI * i / N), sin(2 * M_PI * i / N)));
+            y.push_back(complex<float>(cos(2 * M_PI * i / N), sin(2 * M_PI * -i / N)));
         }
         return y;
     }
 
     vector<complex<float>> fftCompute(vector<complex<float>> x, int N) {
         if (N == 2) {
-            return dft(x, 2);
+            vector<complex<float>> y;
+            y.push_back(x[0] + x[1]);
+            y.push_back(x[0] - x[1]);
+            utils::printSeq(x);
+            return y;
         }
         vector<complex<float>> tmp1, tmp2, fft1, fft2;
         tmp1 = utils::getEvenOddTerms(x, 0);
@@ -102,11 +106,12 @@ namespace basic {
 
     vector<complex<float>> fftCombine(vector<complex<float>> x1, vector<complex<float>> x2, int N) {
         vector<complex<float>> y, w = twiddle(N);
+                
         for (int i = 0; i < N/2; i++) {
-            y.push_back(x1[i] + x2[i]);
-        }
-        for (int i = N/2; i < N; i++) {
             y.push_back(x1[i] + w[i] * x2[i]);
+        }
+        for (int i = 0; i < N/2; i++) {
+            y.push_back(x1[i] - w[i] * x2[i]);
         }
         return y;
     }

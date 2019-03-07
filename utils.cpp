@@ -22,29 +22,6 @@ namespace utils {
         cout << endl;
     }
 
-    int revBit(int n) { 
-        int rev = 0;       
-        while (n > 0) { 
-            rev <<= 1; 
-            
-            if (n & 1 == 1) {
-                rev ^= 1; 
-            }
-
-            n >>= 1;     
-        } 
-        return rev; 
-    } 
-
-    vector<complex<float>> bitReversal(vector<complex<float>> x) {
-        vector<complex<float>> y;
-        cout << x.size() << endl;
-        for (int i = 0; i < x.size(); i++) {
-            y.push_back(x[revBit(i)]);
-        }
-        return y;
-    }
-
     vector<complex<float>> matMul(vector<complex<float>> x1, vector<complex<float>> x2) {
         vector<complex<float>> y;
         for (int i = 0; i < x1.size(); i++) {

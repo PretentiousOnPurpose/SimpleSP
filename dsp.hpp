@@ -11,14 +11,11 @@ namespace basic {
     vector<complex<float>> fftCompute(vector<complex<float>> , int);
     vector<complex<float>> twiddle(int);
     vector<complex<float>> fftCombine(vector<complex<float>>, vector<complex<float>>, int);
-    // vector<complex<float>> ifft(vector<complex<float>>);
 };
 
 namespace utils {
     void printSeq(vector<float>);
     void printSeq(vector<complex<float>>);
-    int revBit(int);
-    vector<complex<float>> bitReversal(vector<complex<float>>);
     vector<complex<float>> matMul(vector<complex<float>>, vector<complex<float>>);
     vector<complex<float>> matAdd(vector<complex<float>>, vector<complex<float>>);
     vector<complex<float>> getEvenOddTerms(vector<complex<float>>, int);
