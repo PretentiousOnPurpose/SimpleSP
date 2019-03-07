@@ -7,10 +7,11 @@ namespace basic {
     vector<float> conv1d(vector<float>, vector<float>);
     vector<complex<float>> dft(vector<complex<float>>, int);
     vector<complex<float>> idft(vector<complex<float>>);
-    vector<complex<float>> fft(vector<complex<float>>, int);
-    vector<complex<float>> fftCompute(vector<complex<float>> , int);
-    vector<complex<float>> twiddle(int);
-    vector<complex<float>> fftCombine(vector<complex<float>>, vector<complex<float>>, int);
+    vector<complex<float>> fft(vector<complex<float>>, int, int = 0);
+    vector<complex<float>> ifft(vector<complex<float>>, int);
+    vector<complex<float>> fftCompute(vector<complex<float>> , int, int);
+    vector<complex<float>> twiddle(int, int);
+    vector<complex<float>> fftCombine(vector<complex<float>>, vector<complex<float>>, int, int);
 };
 
 namespace utils {
