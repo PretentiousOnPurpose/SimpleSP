@@ -27,6 +27,6 @@ namespace filters {
 };
 
 namespace image {
-    vector<vector<float>> compress(vector<vector<float>>);
-    vector<vector<float>> decompress(vector<vector<float>>); 
+    vector<vector<int>> blur(vector<vector<int>>);
+    vector<vector<int>> deblur(vector<vector<int>>);    
 };
