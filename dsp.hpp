@@ -1,5 +1,7 @@
 #include <vector>
 #include <complex.h>
+#include <opencv2/core/core.hpp>
+
 using std::vector;
 using namespace std;
 
@@ -27,6 +29,6 @@ namespace filters {
 };
 
 namespace image {
-    vector<vector<int>> blur(vector<vector<int>>);
-    vector<vector<int>> deblur(vector<vector<int>>);    
+    cv::Mat gaussianFilter(int);
+    void blur(string, cv::Mat, int);
 };
