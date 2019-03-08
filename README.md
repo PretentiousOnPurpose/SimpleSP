@@ -1,19 +1,19 @@
 # SimpleSP
 A Signal Processing Library written in C++
 
-## basic 
+#### basic 
   ---> 1D Convolution
   ---> N Pt DFT and IDFT
   ---> Radix-2 DIT FFT & IFFT
 
-## image
+#### image
   ---> Bluring & Debluring (on going)
   ---> Wavelet based Compression (Not yet implemented)
 
-## filter 
+#### filter 
   ---> IIR & FIR Buttorworth Filters (Not yet implemented)
 
-## patternRecognition
+#### patternRecognition
   ---> Feedforward Neural Network (Not yet implemented)
   ---> Support Vector Machine (Not yet implemented)
   
