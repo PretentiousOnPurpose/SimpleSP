@@ -30,5 +30,5 @@ namespace filters {
 
 namespace image {
     cv::Mat gaussianFilter(int);
-    void blur(string, int);
+    void blur(string, int, int);
 };

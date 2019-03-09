@@ -24,12 +24,20 @@ namespace image {
 
         return filter;
     }
-    void blur(string filename, int ksize) {
+    void blur(string filename, int ksize, int gray) {
         Mat filter = image::gaussianFilter(ksize);
-        Mat img = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
-        Mat bimg = Mat::zeros(img.rows, img.cols, CV_8UC1);
+        Mat img, bimg, bgr[3];
 
-        for (int k = 0; k < 1; k++) {
+        if (gray) {
+            img = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
+            bimg = Mat::zeros(img.rows, img.cols, CV_8UC1);
+        } else {
+            img = imread(filename, CV_LOAD_IMAGE_ANYCOLOR);
+            split(img, bgr);
+            bimg = Mat::zeros(img.rows, img.cols, CV_8UC3);    
+        }
+
+        if (gray) {
             for (int i = 0; i < img.rows; i++) {
                 for (int j = 0; j < img.cols; j++) {
                     int tmp = 0, sum = 0;
@@ -37,14 +45,34 @@ namespace image {
                     for (int m = 0; m < ksize; m++) {
                         for (int n = 0; n < ksize; n++) {
                             if (!( (i - ksize/2 + m) < 0 || (j - ksize/2 + n) < 0 || (i - ksize/2 + m) >= (img.rows) || (j - ksize/2 + n) >= (img.cols) )) {                                
-                                tmp += (int) img.at<uint8_t>(i - ksize/2 + m, j - ksize/2 + n, k) * filter.at<int>(m, n);
+                                tmp += (int) img.at<uint8_t>(i - ksize/2 + m, j - ksize/2 + n) * filter.at<int>(m, n);
                                 sum += filter.at<int>(m, n);
                             }
                         }
                     }
-                    bimg.at<uint8_t>(i, j, k) = tmp / sum;
+                    bimg.at<uint8_t>(i, j) = tmp / sum;
                 } 
             }
+        } else {
+            for (int k = 0; k < img.channels(); k++) {
+                for (int i = 0; i < img.rows; i++) {
+                    for (int j = 0; j < img.cols; j++) {
+                        int tmp = 0, sum = 0;
+                        
+                        for (int m = 0; m < ksize; m++) {
+                            for (int n = 0; n < ksize; n++) {
+                                if (!( (i - ksize/2 + m) < 0 || (j - ksize/2 + n) < 0 || (i - ksize/2 + m) >= (img.rows) || (j - ksize/2 + n) >= (img.cols) )) {                                
+                                    tmp += (int) bgr[k].at<uint8_t>(i - ksize/2 + m, j - ksize/2 + n) * filter.at<int>(m, n);
+                                    sum += filter.at<int>(m, n);
+                                }
+                            }
+                        }
+                        bgr[k].at<uint8_t>(i, j) = tmp / sum;
+                    } 
+                }    
+            }
+            vector<Mat> channels = {bgr[0], bgr[1], bgr[2]};
+            merge(channels, bimg);   
         }
 
 
