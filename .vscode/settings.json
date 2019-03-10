@@ -33,6 +33,12 @@
         "utility": "cpp",
         "ctime": "cpp",
         "chrono": "cpp",
-        "ratio": "cpp"
+        "ratio": "cpp",
+        "cstddef": "cpp",
+        "cstring": "cpp",
+        "deque": "cpp",
+        "memory": "cpp",
+        "mutex": "cpp",
+        "numeric": "cpp"
     }
 }

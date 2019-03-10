@@ -31,13 +31,7 @@ namespace image {
         if (gray) {
             img = imread(filename, CV_LOAD_IMAGE_GRAYSCALE);
             bimg = Mat::zeros(img.rows, img.cols, CV_8UC1);
-        } else {
-            img = imread(filename, CV_LOAD_IMAGE_ANYCOLOR);
-            split(img, bgr);
-            bimg = Mat::zeros(img.rows, img.cols, CV_8UC3);    
-        }
 
-        if (gray) {
             for (int i = 0; i < img.rows; i++) {
                 for (int j = 0; j < img.cols; j++) {
                     int tmp = 0, sum = 0;
@@ -54,6 +48,10 @@ namespace image {
                 } 
             }
         } else {
+            img = imread(filename, CV_LOAD_IMAGE_ANYCOLOR);
+            split(img, bgr);
+            bimg = Mat::zeros(img.rows, img.cols, CV_8UC3);    
+
             for (int k = 0; k < img.channels(); k++) {
                 for (int i = 0; i < img.rows; i++) {
                     for (int j = 0; j < img.cols; j++) {
@@ -76,6 +74,6 @@ namespace image {
         }
 
 
-        imwrite("B" + filename, bimg);
+        imwrite("Blur_" + filename, bimg);
     }
 };

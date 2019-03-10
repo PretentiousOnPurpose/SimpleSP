@@ -11,13 +11,13 @@ namespace basic {
         int LEN_CONV_SEQ = x1.size() + x2.size() - 1;
         
         vector<float> y;
-        y.reserve(LEN_CONV_SEQ);
 
         for (int i = 0; i < LEN_CONV_SEQ; i++) {
-            y[i] = 0;
+            float tmp = 0;
             for (int j = 0; j <= i; j++) {
-                y[i] += x1[j] * x2[i - j];
+                tmp += x1[j] * x2[i - j];
             }
+            y.push_back(tmp);
         }
 
         return y;
