@@ -23,6 +23,33 @@ namespace utils {
         cout << endl;
     }
 
+    vector<complex<float>> realToComplex(vector<float> x) {
+        vector<complex<float>> y;
+        for (auto i: x) {
+            y.push_back(complex<float>{i, 0});
+        }
+
+        return y;
+    }
+
+    vector<float> complexToReal(vector<complex<float>> x) {
+        vector<float> y;
+        for (auto i: x) {
+            y.push_back(i.real());
+        }
+
+        return y;
+    }
+
+    vector<float> ampResponse(vector<complex<float>> x) {
+        vector<float> y;
+        for (auto i: x) {
+            y.push_back(sqrt(i.real() * i.real() + i.imag() * i.imag()));
+        }
+
+        return y;
+    }
+
     vector<float> linspace(float start, float stop, float N) {
         vector<float> y;
         for (int i = 0; i < N; i++) {
@@ -32,10 +59,10 @@ namespace utils {
         return y;
     }
 
-    vector<float> Sin(float freq, vector<float> t_samples) {
+    vector<float> Sin(float freq, vector<float> t_samples, float gain) {
         vector<float> y;
-        for (auto x: t_samples) {
-            y.push_back(sin(2 * M_PI * freq * x));
+        for (float x: t_samples) {
+            y.push_back(gain * sin(2 * M_PI * freq * x));
         }
 
         return y;

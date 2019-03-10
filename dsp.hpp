@@ -19,8 +19,13 @@ namespace basic {
 namespace utils {
     void printSeq(vector<float>);
     void printSeq(vector<complex<float>>);
+
+    vector<complex<float>> realToComplex(vector<float>);
+    vector<float> complexToReal(vector<complex<float>>);
+    vector<float> ampResponse(vector<complex<float>>);
+
     vector<float> linspace(float, float, float);
-    vector<float> Sin(float, vector<float>);
+    vector<float> Sin(float, vector<float>, float = 1.0);
     
     vector<float> merge(vector<vector<float>>);
 
