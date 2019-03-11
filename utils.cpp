@@ -52,8 +52,8 @@ namespace utils {
 
     vector<float> linspace(float start, float stop, float N) {
         vector<float> y;
-        for (int i = 0; i < N; i++) {
-            y.push_back(start + i * (stop - start)/(N-1));
+        for (int i = 0; i <= N; i++) {
+            y.push_back(start + i * (stop - start)/(N));
         }
 
         return y;
@@ -63,6 +63,15 @@ namespace utils {
         vector<float> y;
         for (float x: t_samples) {
             y.push_back(gain * sin(2 * M_PI * freq * x));
+        }
+
+        return y;
+    }
+
+    vector<float> Cos(float freq, vector<float> t_samples, float gain) {
+        vector<float> y;
+        for (float x: t_samples) {
+            y.push_back(gain * cos(2 * M_PI * freq * x));
         }
 
         return y;

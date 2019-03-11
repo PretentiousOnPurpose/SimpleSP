@@ -26,6 +26,7 @@ namespace utils {
 
     vector<float> linspace(float, float, float);
     vector<float> Sin(float, vector<float>, float = 1.0);
+    vector<float> Cos(float, vector<float>, float = 1.0);
     
     vector<float> merge(vector<vector<float>>);
 

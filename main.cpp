@@ -8,35 +8,33 @@ using namespace basic;
 
 int main() {
     
-    vector<float> t = linspace(-10, 10, 500);
-    vector<float> sin12 = Sin(0.5, t);
-    // vector<float> sin5 = Sin(7.5, t);
-    // vector<float> sin10 = Sin(10, t);
-    vector<float> sin20 = Sin(20, t, 0.25);
-    // vector<float> sin50 = Sin(50, t);
+    vector<float> t = linspace(0, 10, 64);
+    vector<float> sin12 = Sin(0.1, t);
+    vector<float> cos12 = Cos(0.1, t);
+    vector<float> sin20 = Sin(200, t);
 
-    vector<vector<float>> M = {sin12, sin20};
+    vector<vector<float>> M = {sin12, sin20, cos12};
+    vector<vector<float>> M1 = {sin12, cos12};
 
+    vector<float> x1 = merge(M1);
     vector<float> x = merge(M);
-    // vector<float> x = sin12;
 
-    vector<float> Filter = filter::FIRLowPass(2, 1, 11);
 
-    auto a = fft(realToComplex(x), 64);
-    auto b = fft(realToComplex(Filter), 64);
-    cout << "A: ";
-    printSeq(sin20);
+    auto Filter = filter::FIRLowPass(1.1, 1, 11);
 
-    cout << "B: ";
-    printSeq(ampResponse(b));
+    auto H = fft(realToComplex(Filter), 64);
+    auto X = fft(realToComplex(x), 64);
+
+    auto Y = matMul(X, H);
+
+    auto y = ifft(Y, 64);
+
+    printSeq(x1);
+    cout << endl;
+    printSeq(x);
+    cout << endl;
     
-
-    vector<complex<float>> j = matMul(a, b);
-
-    vector<float> y = ampResponse(fft(j, 64, 1));
-
-    cout << "Out: ";
-    printSeq(y);
+    printSeq(complexToReal(y));
 
     return 0;
 }
