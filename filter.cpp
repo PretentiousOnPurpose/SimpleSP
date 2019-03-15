@@ -15,12 +15,12 @@ namespace filter {
 
         for (float i : t) {
             if (i == 0) {
-                h.push_back(gain * fc / M_PI);
+                h.push_back(gain * 2 * fc);
             } else {
                 h.push_back(gain * sin(2 * M_PI * fc * i) / (i * M_PI));
             }    
         }
-        
+
         return h;
     }
 }
