@@ -7,6 +7,7 @@ using namespace std;
 
 namespace basic {
     vector<float> conv1d(vector<float>, vector<float>);
+    vector<float> circConv(vector<float>, vector<float>);
     vector<complex<float>> dft(vector<complex<float>>, int);
     vector<complex<float>> idft(vector<complex<float>>);
     vector<complex<float>> fft(vector<complex<float>>, int, int = 0);
@@ -32,13 +33,20 @@ namespace utils {
 
     vector<complex<float>> matMul(vector<complex<float>>, vector<complex<float>>);
     vector<complex<float>> matAdd(vector<complex<float>>, vector<complex<float>>);
-    vector<complex<float>> matMul(vector<complex<float>>, vector<complex<float>>);
-    vector<complex<float>> matAdd(vector<complex<float>>, vector<complex<float>>);
+    vector<float> matMul(vector<float>, vector<float>);
+    vector<float> matAdd(vector<float>, vector<float>);
+
+    vector<float> zeroPadding(vector<float>, int);
+    vector<complex<float>> zeroPadding(vector<complex<float>>, int);
 
     vector<complex<float>> getEvenOddTerms(vector<complex<float>>, int);
-    vector<float> audioIn(string);
-    vector<float> audioInTxt(string);
-    char * remove_extra_whitespaces(char *);    
+    float max(vector<float>);
+    float max(float, float);
+    float min(vector<float>);
+    float min(float, float);
+    float sum(vector<float>);
+    int len(vector<float>);
+    
 };
 
 namespace filter {

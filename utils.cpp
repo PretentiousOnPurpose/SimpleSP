@@ -1,6 +1,5 @@
 #include <iostream>
 #include <complex.h>
-#include <fstream>
 #include <vector>
 #include "dsp.hpp"
 using std::vector;
@@ -52,8 +51,8 @@ namespace utils {
 
     vector<float> linspace(float start, float stop, float N) {
         vector<float> y;
-        for (int i = 0; i <= N; i++) {
-            y.push_back(start + i * (stop - start)/(N));
+        for (float i = 0; i < N; i++) {
+            y.push_back(start + i * (stop - start)/(N-1));
         }
 
         return y;
@@ -128,6 +127,23 @@ namespace utils {
         return y;
     }
 
+    vector<float> zeroPadding(vector<float> x, int N) {
+        for (int i = 0; i < N; i++) {
+            x.push_back(0);            
+        }
+
+        return x;
+    }
+
+    vector<complex<float>> zeroPadding(vector<complex<float>> x, int N) {
+        for (int i = 0; i < N; i++) {
+            x.push_back(complex<float>{0, 0});            
+        }
+
+        return x;
+    }
+
+
     vector<complex<float>> getEvenOddTerms(vector<complex<float>> x, int b) {
         vector<complex<float>> y;
         for (int i = 0 + b; i < x.size(); i += 2) {
@@ -137,18 +153,60 @@ namespace utils {
         return y;
     }
 
-    vector<float> audioIn(string filename) {
-        vector<float> y;
-        string line;
-        ifstream fp(filename);
-        
-        if (fp.is_open()) {
-            while(getline(fp, line)) {
-                cout << line << endl;
+    float max(vector<float> x) {
+        float A = 0;
+        for (float i : x) {
+            if (i > A) {
+                A = i;
             }
-            fp.close();
         }
 
-        return y;
+        return A;
     }
+
+    float max(float x1, float x2) {
+        if (x1 > x2) {
+            return x1;
+        }
+
+        return x2;
+    }
+
+    float min(vector<float> x) {
+        float A = x[0];
+        for (float i : x) {
+            if (i < A) {
+                A = i;
+            }
+        }
+
+        return A;
+    }
+
+    float min(float x1, float x2) {
+        if (x1 < x2) {
+            return x1;
+        }
+
+        return x2;
+    }
+
+    float sum(vector<float> x) {
+        float A = 0;
+        for (float i : x) {
+            A += i;
+        }
+
+        return A;
+    }
+
+    int len(vector<float> x) {
+        int A = 0;
+        for (float i : x) {
+            A++;
+        }
+
+        return A;
+    }
+
 }

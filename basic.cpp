@@ -5,6 +5,7 @@
 #include "dsp.hpp"
 using std::vector;
 using namespace std;
+using namespace utils;
 
 namespace basic {
     vector<float> conv1d(vector<float> x1, vector<float> x2) {
@@ -16,6 +17,30 @@ namespace basic {
             float tmp = 0;
             for (int j = 0; j <= i; j++) {
                 tmp += x1[j] * x2[i - j];
+            }
+            y.push_back(tmp);
+        }
+
+        return y;
+    }
+
+    vector<float> circConv(vector<float> x1, vector<float> x2) {
+        int LEN_CONV_SEQ = utils::max(len(x1), len(x2));
+        x1 = zeroPadding(x1, (LEN_CONV_SEQ - len(x1)));
+        x2 = zeroPadding(x2, (LEN_CONV_SEQ - len(x2)));
+
+        vector<float> y;
+        float ind = 0;
+
+        for (int i = 0; i < LEN_CONV_SEQ; i++) {
+            float tmp = 0;
+            for (int j = 0; j < LEN_CONV_SEQ; j++) {
+                if ((i - j) < 0) {
+                    ind = LEN_CONV_SEQ + i - j;
+                } else {
+                    ind = i - j;
+                }
+                tmp += x1[j] * x2[ind];
             }
             y.push_back(tmp);
         }
