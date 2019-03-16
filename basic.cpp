@@ -16,7 +16,9 @@ namespace basic {
         for (int i = 0; i < LEN_CONV_SEQ; i++) {
             float tmp = 0;
             for (int j = 0; j <= i; j++) {
-                tmp += x1[j] * x2[i - j];
+                if (i - j >= 0) {
+                    tmp += x1[j] * x2[i - j];
+                }
             }
             y.push_back(tmp);
         }
