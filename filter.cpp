@@ -7,19 +7,22 @@ using std::vector;
 using namespace std;
 
 namespace filter {
-    vector<float> FIRLowPass(float fp, float fs, float F, float gain, int N, string window) {
+    vector<float> FIRLowPass(float fp, float fs, float F, int samples, int N, string window) {
         vector<float> h, t;
         float fc = (fp + fs)/2;
 
-        t = utils::linspace(0, N, 100);
+        t = utils::linspace(0, N/2, N/2 + 1);
 
         for (float i : t) {
             if (i == 0) {
-                h.push_back(gain * 2 * fc / F);
+                h.push_back(2 * fc / F);
             } else {
-                h.push_back(gain * sin(2 * M_PI * fc * i / F) / (i * M_PI));
+                h.push_back(sin(2 * M_PI * fc * i / F) / (i * M_PI));
             }    
         }
+
+        // h = utils::zeroPadding(h, samples - N/2+1);
+
         return h;
     }
 

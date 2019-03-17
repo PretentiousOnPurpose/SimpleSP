@@ -8,15 +8,16 @@ using namespace basic;
 
 int main() {
     
-    vector<float> t = linspace(0, 100, 100);
-    vector<float> x = Sin(0.60, t, 1);
+    vector<float> t = sampler(0, 1, 400);
+    
+    vector<float> x = Sin(60, t);  
 
     vector<float> y;
     
 
-    auto Filter = filter::FIRLowPass(0.25, 0.25, 1, 1, 11);
+    auto Filter = filter::FIRLowPass(120, 150, 400, 100, 11);
 
-    printSeq(Filter);
+    printSeq(circConv(x, t));
 
     return 0;
 }

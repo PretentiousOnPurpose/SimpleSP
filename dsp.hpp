@@ -26,8 +26,9 @@ namespace utils {
     vector<float> ampResponse(vector<complex<float>>);
 
     vector<float> linspace(float, float, float);
-    vector<float> Sin(float, vector<float>, float);
-    vector<float> Cos(float, vector<float>, float);
+    vector<float> sampler(float, float, float);
+    vector<float> Sin(float, vector<float>);
+    vector<float> Cos(float, vector<float>);
     
     vector<float> merge(vector<vector<float>>);
 
@@ -50,7 +51,7 @@ namespace utils {
 };
 
 namespace filter {
-    vector<float> FIRLowPass(float, float, float, float, int, string = "rect");
+    vector<float> FIRLowPass(float, float, float, int, int, string = "rect");
     vector<float> FIRHighPass(float, float, float, int, string = "rect");
     vector<float> FIRBandPass(float, float, float, float, float, int, string = "rect");
     vector<float> FIRBandStop(float, float, float, float, float, int, string = "rect");

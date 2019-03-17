@@ -10,15 +10,15 @@ using namespace utils;
 namespace basic {
     vector<float> conv1d(vector<float> x1, vector<float> x2) {
         int LEN_CONV_SEQ = x1.size() + x2.size() - 1;
-        
+        x1 = zeroPadding(x1, len(x2));
+        x2 = zeroPadding(x2, len(x1));
+
         vector<float> y;
 
         for (int i = 0; i < LEN_CONV_SEQ; i++) {
             float tmp = 0;
             for (int j = 0; j <= i; j++) {
-                if (i - j >= 0) {
-                    tmp += x1[j] * x2[i - j];
-                }
+                tmp += x1[j] * x2[i - j];
             }
             y.push_back(tmp);
         }

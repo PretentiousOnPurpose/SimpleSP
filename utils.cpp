@@ -58,19 +58,28 @@ namespace utils {
         return y;
     }
 
-    vector<float> Sin(float freq, vector<float> t_samples, float F) {
+    vector<float> sampler(float start, float stop, float freq) {
         vector<float> y;
-        for (float x: t_samples) {
-            y.push_back(sin(2 * M_PI * freq / F * x));
+        for (float i = start; i <= stop; i += (1/freq)) {
+            y.push_back(i);
         }
 
         return y;
     }
 
-    vector<float> Cos(float freq, vector<float> t_samples, float F) {
+    vector<float> Sin(float freq, vector<float> t_samples) {
         vector<float> y;
         for (float x: t_samples) {
-            y.push_back(cos(2 * M_PI * freq / F * x));
+            y.push_back(sin(2 * M_PI * freq * x));
+        }
+
+        return y;
+    }
+
+    vector<float> Cos(float freq, vector<float> t_samples) {
+        vector<float> y;
+        for (float x: t_samples) {
+            y.push_back(cos(2 * M_PI * freq * x));
         }
 
         return y;
