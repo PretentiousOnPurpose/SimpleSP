@@ -3,17 +3,18 @@ A Signal Processing Library written in C++
 
 #### basic 
 ###### -----> 1D Convolution <br />
+###### -----> Circular Convolution <br />
 ###### -----> N Pt DFT and IDF <br />
 ###### -----> Radix-2 DIT FFT & IFFT <br />
 
 #### filter 
-###### -----> IIR & FIR Buttorworth Filters (Not yet implemented) <br />
+###### -----> Digital FIR Filters (Low Pass, High Pass, Band Pass and Band Stop)<br />
 
 #### system
 ###### -----> Audio Filtering (Not yet implemented) <br />
 
 #### image
-###### -----> Bluring & Debluring (on going) <br />
+###### -----> Bluring & Debluring (only blurring completed) <br />
 ###### -----> Image Segmentation (Not yet implemented) <br />
 ###### -----> Noise Removal (Not yet implemented) <br />
 

@@ -51,7 +51,7 @@ namespace utils {
 };
 
 namespace filter {
-    vector<float> FIRLowPass(float, float, float, int, int, string = "rect");
+    vector<float> FIRLowPass(float, float, float, int, string = "rect");
     vector<float> FIRHighPass(float, float, float, int, string = "rect");
     vector<float> FIRBandPass(float, float, float, float, float, int, string = "rect");
     vector<float> FIRBandStop(float, float, float, float, float, int, string = "rect");
