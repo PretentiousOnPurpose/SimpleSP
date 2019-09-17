@@ -6,6 +6,13 @@ using std::vector;
 using namespace std;
 
 namespace utils {
+    void printSeq(vector<int> x) {
+        for (int i = 0; i < x.size(); i++) {
+            cout << x[i] << " ";
+        }
+        cout << endl;
+    }
+
     void printSeq(vector<float> x) {
         cout.precision(3);
         for (int i = 0; i < x.size(); i++) {
@@ -164,7 +171,7 @@ namespace utils {
 
     float cAbsDiffSqr(complex<float> a, complex<float> b) {
         float c = 0;
-        c = (a.real - b.real) * (a.real - b.real) + (a.imag - b.imag) * (a.imag - b.imag);
+        c = (a.real() - b.real()) * (a.real() - b.real()) + (a.imag() - b.imag()) * (a.imag() - b.imag());
 
         return c;
     }

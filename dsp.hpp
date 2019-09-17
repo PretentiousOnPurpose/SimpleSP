@@ -18,9 +18,10 @@ namespace basic {
 };
 
 namespace utils {
+    void printSeq(vector<int>);
     void printSeq(vector<float>);
     void printSeq(vector<complex<float>>);
-
+    
     vector<complex<float>> realToComplex(vector<float>);
     vector<float> complexToReal(vector<complex<float>>);
     vector<float> ampResponse(vector<complex<float>>);
@@ -60,7 +61,7 @@ namespace filter {
 
 namespace comm {
     vector<complex<float>> QAMMod(vector<int>, int M, int size);
-    vector<int> QAMDemod(vector<complex<float>>, int M, int size);
+    vector<int> QAMDemod(vector<complex<float>>, int M, int size, int softOut);
 }
 
 

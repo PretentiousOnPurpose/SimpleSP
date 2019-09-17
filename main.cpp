@@ -5,15 +5,15 @@
 using namespace std;
 using namespace utils;
 using namespace basic;
+using namespace comm;
 
 int main() {   
 
-    vector<complex<float>> x1 = {{1, 0}, {2, 0}, {3, 0}, {4, 0}};
-    vector<complex<float>> x2 = {{2, 0}, {3, 0}};
+    vector<int> data = {0, 0, 0, 1, 1, 0, 1, 1};
+    auto modData = QAMMod(data, 4, 8);
+    auto demodData = QAMDemod(modData, 4, 4, 0);
 
-    vector<complex<float>> y = basic::conv1d(x1, x2);
-
-    printSeq(y);
+    printSeq(demodData);
 
     return 0;
 }
