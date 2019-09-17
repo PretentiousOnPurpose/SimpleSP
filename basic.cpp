@@ -8,15 +8,24 @@ using namespace std;
 using namespace utils;
 
 namespace basic {
-    vector<float> conv1d(vector<float> x1, vector<float> x2) {
+
+    // Performs 1-d Convolution on two complex vectors
+
+    vector<complex<float>> conv1d(vector<complex<float>> x1, vector<complex<float>> x2) {
         int LEN_CONV_SEQ = x1.size() + x2.size() - 1;
+
+        // Adding zeros in order to have both the sequences 
+        // of the same length
+
         x1 = zeroPadding(x1, len(x2));
         x2 = zeroPadding(x2, len(x1));
 
-        vector<float> y;
+        vector<complex<float>> y;
+
+        // Convolution sum
 
         for (int i = 0; i < LEN_CONV_SEQ; i++) {
-            float tmp = 0;
+            complex<float> tmp = 0;
             for (int j = 0; j <= i; j++) {
                 tmp += x1[j] * x2[i - j];
             }
@@ -26,22 +35,24 @@ namespace basic {
         return y;
     }
 
-    vector<float> circConv(vector<float> x1, vector<float> x2) {
+    // Performs 1-d Circular Convolution on two complex vectors
+
+    vector<complex<float>> circConv(vector<complex<float>> x1, vector<complex<float>> x2) {
         int LEN_CONV_SEQ = utils::max(len(x1), len(x2));
+
+        // Adding zeros in order to have both the sequences 
+        // of the same length
+        
         x1 = zeroPadding(x1, (LEN_CONV_SEQ - len(x1)));
         x2 = zeroPadding(x2, (LEN_CONV_SEQ - len(x2)));
 
-        vector<float> y;
-        float ind = 0;
+        vector<complex<float>> y;
+        int ind = 0;
 
         for (int i = 0; i < LEN_CONV_SEQ; i++) {
-            float tmp = 0;
+            complex<float> tmp = 0;
             for (int j = 0; j < LEN_CONV_SEQ; j++) {
-                if ((i - j) < 0) {
-                    ind = LEN_CONV_SEQ + i - j;
-                } else {
-                    ind = i - j;
-                }
+                ind = ((i - j) < 0) * (LEN_CONV_SEQ + i - j) + (((i - j) >= 0) * (i - j));
                 tmp += x1[j] * x2[ind];
             }
             y.push_back(tmp);
@@ -71,8 +82,7 @@ namespace basic {
         return y;
     }
 
-    vector<complex<float>> idft(vector<complex<float>> x) {
-        int N = x.size();
+    vector<complex<float>> idft(vector<complex<float>> x, int N) {
         complex<float> tmp;
 
         vector<complex<float>> y;

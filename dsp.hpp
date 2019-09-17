@@ -6,10 +6,10 @@ using std::vector;
 using namespace std;
 
 namespace basic {
-    vector<float> conv1d(vector<float>, vector<float>);
-    vector<float> circConv(vector<float>, vector<float>);
+    vector<complex<float>> conv1d(vector<complex<float>>, vector<complex<float>>);
+    vector<complex<float>> circConv(vector<complex<float>>, vector<complex<float>>);
     vector<complex<float>> dft(vector<complex<float>>, int);
-    vector<complex<float>> idft(vector<complex<float>>);
+    vector<complex<float>> idft(vector<complex<float>>, int);
     vector<complex<float>> fft(vector<complex<float>>, int, int = 0);
     vector<complex<float>> ifft(vector<complex<float>>, int);
     vector<complex<float>> fftCompute(vector<complex<float>> , int, int);
@@ -41,13 +41,14 @@ namespace utils {
     vector<complex<float>> zeroPadding(vector<complex<float>>, int);
 
     vector<complex<float>> getEvenOddTerms(vector<complex<float>>, int);
+    float cAbsDiffSqr(complex<float> a, complex<float> b);
     float max(vector<float>);
     float max(float, float);
     float min(vector<float>);
     float min(float, float);
     float sum(vector<float>);
     int len(vector<float>);
-    
+    int len(vector<complex<float>>);
 };
 
 namespace filter {
@@ -56,6 +57,11 @@ namespace filter {
     vector<float> FIRBandPass(float, float, float, float, float, int, string = "rect");
     vector<float> FIRBandStop(float, float, float, float, float, int, string = "rect");
 };
+
+namespace comm {
+    vector<complex<float>> QAMMod(vector<int>, int M, int size);
+    vector<int> QAMDemod(vector<complex<float>>, int M, int size);
+}
 
 
 namespace image {

@@ -162,6 +162,13 @@ namespace utils {
         return y;
     }
 
+    float cAbsDiffSqr(complex<float> a, complex<float> b) {
+        float c = 0;
+        c = (a.real - b.real) * (a.real - b.real) + (a.imag - b.imag) * (a.imag - b.imag);
+
+        return c;
+    }
+
     float max(vector<float> x) {
         float A = 0;
         for (float i : x) {
@@ -212,6 +219,15 @@ namespace utils {
     int len(vector<float> x) {
         int A = 0;
         for (float i : x) {
+            A++;
+        }
+
+        return A;
+    }
+
+    int len(vector<complex<float>> x) {
+        int A = 0;
+        for (complex<float> i : x) {
             A++;
         }
 
