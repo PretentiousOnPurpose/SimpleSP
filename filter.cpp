@@ -2,83 +2,26 @@
 #include <cmath>
 #include<vector>
 #include "dsp.hpp"
-
+#define PI 3.14159 
 using std::vector;
 using namespace std;
 
 namespace filter {
-    vector<float> FIRLowPass(float fp, float fs, float F, int N, string window) {
+    vector<float> FIRLowPass(float fp, float fs, float F, int N, int phi, string window) {
         vector<float> h, t;
-        float fc = (fp + fs)/2;
-
-        t = utils::linspace(0, N/2, N/2 + 1);
+        float fc = (fp + fs) / 2;
+        t = utils::linspace(-(N - 1) / 2, (N - 1) / 2, N);
 
         for (float i : t) {
-            if (i == 0) {
+            
+            if ((i - phi) == 0) {
                 h.push_back(2 * fc / F);
             } else {
-                h.push_back(sin(2 * M_PI * fc * i / F) / (i * M_PI));
+                h.push_back(sin(2 * PI * (fc / F) * (i - phi)) / ((i - phi) * PI));
             }    
         }
 
         return h;
     }
 
-    vector<float> FIRHighPass(float fp, float fs, float F, int N, string window) {
-        vector<float> h, t;
-        float fc = (fp + fs)/2;
-
-        t = utils::linspace(0, N/2, N/2 + 1);
-
-        for (float i : t) {
-            if (i == 0) {
-                h.push_back(1 - (2 * fc / F));
-            } else {
-                h.push_back(-sin(2 * M_PI * fc * i / F) / (i * M_PI));
-            }    
-        }
-        return h;
-    }
-
-    vector<float> FIRBandPass(float fp1, float fs1, float fp2, float fs2, float F, int N, string window) {
-        vector<float> h, t;
-
-        float dF = utils::min((fp1 - fs1), (fs2 - fp2));
-
-        float fc1 = fp1 - dF/2;
-        float fc2 = fp2 + dF/2;
-
-        t = utils::linspace(0, N/2, N/2 + 1);
-
-        utils::printSeq(t);
-
-        for (float i : t) {
-            if (i == 0) {
-                h.push_back(2 * (fc2 - fc1) / F);
-            } else {
-                h.push_back((sin(2 * M_PI * fc2 / F * i) - sin(2 * M_PI * fc1 / F * i)) / (i * M_PI));
-            }    
-        }
-        return h;
-    }
-
-    vector<float> FIRBandStop(float fp1, float fs1, float fp2, float fs2, float F, int N, string window) {
-        vector<float> h, t;
-
-        float dF = utils::min((fs1 - fp1), (fp2 - fs2));
-
-        float fc1 = fp1 + dF/2;
-        float fc2 = fp2 - dF/2;
-
-        t = utils::linspace(0, N/2, N/2 + 1);
-
-        for (float i : t) {
-            if (i == 0) {
-                h.push_back(2 * (fc1 - fc2) / F + 1);
-            } else {
-                h.push_back((sin(2 * M_PI * fc1 / F * i) - sin(2 * M_PI * fc2 / F * i)) / (i * M_PI));
-            }    
-        }
-        return h;
-    }
 }

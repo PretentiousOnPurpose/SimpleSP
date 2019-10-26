@@ -1,19 +1,15 @@
 #include <iostream>
 #include "dsp.hpp"
 
-// using namespace cv;
 using namespace std;
 using namespace utils;
 using namespace basic;
-using namespace comm;
+using namespace filter;
 
 int main() {   
 
-    vector<int> data = {0, 0, 0, 1, 1, 0, 1, 1};
-    auto modData = QAMMod(data, 4, 8);
-    auto demodData = QAMDemod(modData, 4, 4, 0);
-
-    printSeq(demodData);
+    auto h = FIRLowPass(18, 20, 100, 11);
+    printSeq(h);
 
     return 0;
 }

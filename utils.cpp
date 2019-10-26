@@ -241,4 +241,8 @@ namespace utils {
         return A;
     }
 
+    void wait() {
+        cout << "\nWaiting\n";
+        cin.ignore();
+    }
 }

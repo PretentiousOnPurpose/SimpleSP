@@ -1,7 +1,5 @@
 #include <vector>
 #include <complex.h>
-#include <opencv2/core/core.hpp>
-
 using std::vector;
 using namespace std;
 
@@ -50,13 +48,11 @@ namespace utils {
     float sum(vector<float>);
     int len(vector<float>);
     int len(vector<complex<float>>);
+    void wait();
 };
 
 namespace filter {
-    vector<float> FIRLowPass(float, float, float, int, string = "rect");
-    vector<float> FIRHighPass(float, float, float, int, string = "rect");
-    vector<float> FIRBandPass(float, float, float, float, float, int, string = "rect");
-    vector<float> FIRBandStop(float, float, float, float, float, int, string = "rect");
+    vector<float> FIRLowPass(float, float, float, int, int = 0, string = "rect");
 };
 
 namespace comm {
@@ -64,9 +60,3 @@ namespace comm {
     vector<int> QAMDemod(vector<complex<float>>, int M, int size, int softOut);
 }
 
-
-namespace image {
-    cv::Mat gaussianFilter(int);
-    void blur(string, int, int);
-    void deblur(string, int);
-};
