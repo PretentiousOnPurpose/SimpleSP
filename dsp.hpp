@@ -52,6 +52,7 @@ namespace utils {
 };
 
 namespace filter {
+    vector<complex<float>> applyFIRFilter(vector<complex<float>> impResponse, vector<complex<float>> data);
     vector<float> FIRLowPass(float, float, float, int, int = 0, string = "rect");
 };
 
