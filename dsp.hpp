@@ -6,6 +6,7 @@ using namespace std;
 namespace basic {
     vector<complex<float>> conv1d(vector<complex<float>>, vector<complex<float>>);
     vector<complex<float>> circConv(vector<complex<float>>, vector<complex<float>>);
+    vector<complex<float>> correlation(vector<complex<float>> x1, vector<complex<float>> x2);
     vector<complex<float>> dft(vector<complex<float>>, int);
     vector<complex<float>> idft(vector<complex<float>>, int);
     vector<complex<float>> fft(vector<complex<float>>, int, int = 0);
@@ -16,6 +17,11 @@ namespace basic {
 };
 
 namespace utils {
+    vector<float> absolute(vector<float> x);
+    vector<complex<float>> absolute(vector<complex<float>> x);
+    vector<complex<float>> conj(vector<complex<float>>);
+    vector<complex<float>> flip(vector<complex<float>>);
+    vector<float> flip(vector<float>);
     void printSeq(vector<int>);
     void printSeq(vector<float>);
     void printSeq(vector<complex<float>>);
@@ -53,7 +59,7 @@ namespace utils {
 
 namespace filter {
     vector<complex<float>> applyFIRFilter(vector<complex<float>> impResponse, vector<complex<float>> data);
-    vector<float> FIRLowPass(float, float, float, int, int = 0, string = "rect");
+    vector<complex<float>> FIRLowPass(float, float, float, int, int = 0, string = "rect");
 };
 
 namespace comm {

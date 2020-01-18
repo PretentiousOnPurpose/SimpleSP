@@ -60,6 +60,15 @@ namespace basic {
 
         return y;
     }
+
+    vector<complex<float>> correlation(vector<complex<float>> x1, vector<complex<float>> x2) {
+        vector<complex<float>> y;
+
+        y = conv1d(x1, conj(flip(x2)));
+
+        return y;
+    }
+
     
     vector<complex<float>> dft(vector<complex<float>> x, int N) {
         complex<float> tmp;

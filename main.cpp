@@ -8,8 +8,12 @@ using namespace filter;
 
 int main() {   
 
-    auto h = FIRLowPass(18, 20, 100, 11);
-    printSeq(h);
+    vector<complex<float>> x = {{1, 2}, {2, 3}, {5, 25}};
+    vector<complex<float>> y = {{3, 9}, {4, 12}, {2, 1}, {33, 100}};
+    
+    auto z = conv1d(x, flip(conj(y)));
+
+    printSeq(absolute(z));
 
     return 0;
 }

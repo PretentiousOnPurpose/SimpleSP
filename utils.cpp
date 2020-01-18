@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 #include <complex.h>
 #include <vector>
 #include "dsp.hpp"
@@ -6,7 +7,58 @@ using std::vector;
 using namespace std;
 
 namespace utils {
+    vector<float> absolute(vector<float> x) {
+        vector<float> y;
+
+        for (int i = 0; i < x.size(); i++) {
+            y.push_back(abs(x[i]));
+        }
+
+        return y;
+    }
+
+    vector<complex<float>> absolute(vector<complex<float>> x) {
+        vector<complex<float>> y;
+
+        for (int i = 0; i < x.size(); i++) {
+            y.push_back(sqrt((x[i].real() * x[i].real()) + (x[i].imag() * x[i].imag())));
+        }
+
+        return y;        
+    }
+
+    vector<complex<float>> conj(vector<complex<float>> x) {
+        vector<complex<float>> y;
+
+        for (int i = 0; i < x.size(); i++) {
+            y.push_back(complex<float>{x[i].real(), -x[i].imag()});
+        }
+
+        return y;
+    }
+
+    vector<complex<float>> flip(vector<complex<float>> x) {
+        vector<complex<float>> y;
+
+        for (int i = x.size() - 1; i >= 0;  i--) {
+            y.push_back(complex<float>{x[i].real(), x[i].imag()});
+        }
+
+        return y;
+    }
+
+    vector<float> flip(vector<float> x) {
+        vector<float> y;
+
+        for (int i = x.size() - 1; i >= 0;  i--) {
+            y.push_back(x[i]);
+        }
+
+        return y;
+    }
+
     void printSeq(vector<int> x) {
+        // cout.precision(5);
         for (int i = 0; i < x.size(); i++) {
             cout << x[i] << " ";
         }
@@ -14,7 +66,7 @@ namespace utils {
     }
 
     void printSeq(vector<float> x) {
-        cout.precision(3);
+        // cout.precision(5);
         for (int i = 0; i < x.size(); i++) {
             cout << x[i] << " ";
         }
@@ -22,7 +74,7 @@ namespace utils {
     }
 
     void printSeq(vector<complex<float>> x) {
-        cout.precision(3);
+        // cout.precision(5);
         for (int i = 0; i < x.size(); i++) {
             cout << x[i] << " ";
         }

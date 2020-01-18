@@ -18,9 +18,5 @@ A Signal Processing Library written in C++
 ###### -----> Convolution Codes <br />
 ###### -----> Viterbi Decoder (Soft and Hard Decision) <br />
 
-
-#### image
-###### -----> Bluring & Debluring (only blurring completed) <br />
-
 #### Dependencies
 ##### -----> OpenCV 3.2 ( For Loading and Saving Image Files ) <br />
