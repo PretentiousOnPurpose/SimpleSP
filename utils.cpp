@@ -129,7 +129,7 @@ namespace utils {
     vector<float> Sin(float freq, vector<float> t_samples) {
         vector<float> y;
         for (float x: t_samples) {
-            y.push_back(sin(2 * M_PI * freq * x));
+            y.push_back(sin(2 * 3.14159 * freq * x));
         }
 
         return y;
@@ -138,7 +138,7 @@ namespace utils {
     vector<float> Cos(float freq, vector<float> t_samples) {
         vector<float> y;
         for (float x: t_samples) {
-            y.push_back(cos(2 * M_PI * freq * x));
+            y.push_back(cos(2 * 3.14159 * freq * x));
         }
 
         return y;

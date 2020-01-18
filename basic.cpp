@@ -7,6 +7,8 @@ using std::vector;
 using namespace std;
 using namespace utils;
 
+// Decimation, Interpolation and Resampling
+
 namespace basic {
 
     // Performs 1-d Convolution on two complex vectors
