@@ -39,7 +39,7 @@ namespace filter {
         return h;
     }
 
-    vector<complex<float>> FIRHighSSPass(float fp, float fs, float F, int N, int phi, string window) {
+    vector<complex<float>> FIRHighPass(float fp, float fs, float F, int N, int phi, string window) {
         vector<float> t;
         vector<complex<float>> h;
         float fc = (fp + fs) / 2;

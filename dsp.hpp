@@ -14,6 +14,10 @@ namespace basic {
     vector<complex<float>> fftCompute(vector<complex<float>> , int, int);
     vector<complex<float>> twiddle(int, int);
     vector<complex<float>> fftCombine(vector<complex<float>>, vector<complex<float>>, int, int);
+    vector<complex<float>> downSample(vector<complex<float>> x, int downSampleRate);
+    vector<complex<float>> decimate(vector<complex<float>> x, int downSampleRate, float sampleRate);
+    vector<complex<float>> upSample(vector<complex<float>> x, int upSampleRate);
+    vector<complex<float>> interpolate(vector<complex<float>> x, int upSampleRate, float sampleRate);
 };
 
 namespace utils {
@@ -59,7 +63,7 @@ namespace utils {
 
 namespace filter {
     vector<complex<float>> applyFIRFilter(vector<complex<float>> impResponse, vector<complex<float>> data);
-    vector<complex<float>> FIRLowPass(float, float, float, int, int = 0, string = "rect");
+    vector<complex<float>> FIRLowPass(float fp, float fs, float F, int N, int phi, string window = "rect");
 };
 
 namespace comm {

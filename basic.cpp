@@ -6,6 +6,7 @@
 using std::vector;
 using namespace std;
 using namespace utils;
+using namespace filter;
 
 // Decimation, Interpolation and Resampling
 
@@ -181,4 +182,44 @@ namespace basic {
 
         return y;        
     }
+
+    vector<complex<float>> downSample(vector<complex<float>> x, int downSampleRate) {
+        vector<complex<float>> y;
+
+        for (int i = 0; i < x.size(); i += downSampleRate) {
+            y.push_back(x[i]);
+        }
+
+        return y;
+    }
+
+    vector<complex<float>> decimate(vector<complex<float>> x, int downSampleRate, float sampleRate) {
+        float newSampleRate = sampleRate / downSampleRate;
+        
+        vector<complex<float>> filterResp = FIRLowPass(newSampleRate / 2, newSampleRate / 2, sampleRate, 7, 0);
+        vector<complex<float>> LPFOut = applyFIRFilter(filterResp, x);
+        return downSample(LPFOut, downSampleRate);
+    }
+
+    vector<complex<float>> upSample(vector<complex<float>> x, int upSampleRate) {
+        vector<complex<float>> y;
+
+        for (int i = 0; i < x.size(); i ++) {
+            y.push_back(x[i]);
+            for (int j = 0; j < upSampleRate; j++) {
+                y.push_back(complex<float>{0, 0});
+            }
+        }
+
+        return y;
+    }
+
+    vector<complex<float>> interpolate(vector<complex<float>> x, int upSampleRate, float sampleRate) {
+        float newSampleRate = upSampleRate * sampleRate;
+        
+        vector<complex<float>> filterResp = FIRLowPass(newSampleRate / 2, newSampleRate / 2, sampleRate, 7, 0);
+        vector<complex<float>> LPFOut = applyFIRFilter(filterResp, x);
+        return upSample(LPFOut, upSampleRate);    
+    }
+
 };
