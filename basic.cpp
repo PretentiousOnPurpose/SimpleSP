@@ -218,8 +218,8 @@ namespace basic {
         float newSampleRate = upSampleRate * sampleRate;
         
         vector<complex<float>> filterResp = FIRLowPass(newSampleRate / 2, newSampleRate / 2, sampleRate, 7, 0);
-        vector<complex<float>> LPFOut = applyFIRFilter(filterResp, x);
-        return upSample(LPFOut, upSampleRate);    
+        vector<complex<float>> LPFOut = applyFIRFilter(filterResp, upSample(x, upSampleRate));
+        return LPFOut;    
     }
 
 };
