@@ -217,7 +217,7 @@ namespace basic {
     vector<complex<float>> interpolate(vector<complex<float>> x, int upSampleRate, float sampleRate) {
         float newSampleRate = upSampleRate * sampleRate;
         
-        vector<complex<float>> filterResp = FIRLowPass(newSampleRate / 2, newSampleRate / 2, sampleRate, 7, 0);
+        vector<complex<float>> filterResp = FIRLowPass(newSampleRate / 2, newSampleRate / 2, newSampleRate, 7, 0);
         vector<complex<float>> LPFOut = applyFIRFilter(filterResp, upSample(x, upSampleRate));
         return LPFOut;    
     }

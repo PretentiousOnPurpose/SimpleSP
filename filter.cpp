@@ -48,9 +48,9 @@ namespace filter {
         for (float i : t) {
             
             if ((i - phi) == 0) {
-                h.push_back(2 * fc / F);
+                h.push_back(1 - 2 * fc / F);
             } else {
-                h.push_back(sin(2 * PI * (fc / F) * (i - phi)) / ((i - phi) * PI));
+                h.push_back((1 / (PI * (i - phi))) * (sin((i - phi) * PI / F) - sin((i - phi) * 2 * PI * fc / F)));
             }    
         }
 

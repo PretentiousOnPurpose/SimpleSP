@@ -43,7 +43,7 @@ namespace comm {
         return modData;    
     }
     
-    vector<int> QAMDemod(vector<complex<float>> modData, int M, int size, int softOut) {
+    vector<int> QAMDemod(vector<complex<float>> modData, int M, int size, int softOut, float noiseVar) {
         float dist = 1000;
         int distIdx = 0;
         float dist_tmp = 0;
@@ -57,7 +57,6 @@ namespace comm {
                 
                 // Iterating over all constellation points and finding the nearest
                 // point (smallest euclidean distance)
-
                 for (int iter_const = 0; iter_const < M; iter_const++) {
                     dist_tmp = cAbsDiffSqr(modData[iter_data], QAM[modIdx + iter_const]);   
                     if (dist_tmp <= dist) {
@@ -67,17 +66,47 @@ namespace comm {
                 }
 
                 // Converting decimal symbol into bits
-
                 for (int iter_bits = 0; iter_bits < bitsPerSym; iter_bits++) {
                     demodOut[iter_data * bitsPerSym + bitsPerSym - iter_bits - 1] = distIdx % 2;
                     distIdx /= 2;
                 }
             }
-        } else { // Soft Output
-
+        } else if (softOut == 1) { // Soft Output (Exact LLR)
+            for (int iter_data = 0; iter_data < size; iter_data++) {
+                for (int iter_bits = 0; iter_bits < bitsPerSym; iter_bits++) {
+                    float lkhd0 = 0, lkhd1 = 0;
+                    for (int iter_const = 0; iter_const < M; iter_const++) {
+                        if (iter_const ^ int(pow(2, iter_bits)) == 0) {
+                            lkhd0 += exp((-1 / (2 * noiseVar)) * ((QAM[iter_const].real() - modData[iter_data].real()) * (QAM[iter_const].real() - modData[iter_data].real()) + (QAM[iter_const].imag() - modData[iter_data].imag()) * (QAM[iter_const].imag() - modData[iter_data].imag())));
+                        } else {
+                            lkhd1 += exp((-1 / (2 * noiseVar)) * ((QAM[iter_const].real() - modData[iter_data].real()) * (QAM[iter_const].real() - modData[iter_data].real()) + (QAM[iter_const].imag() - modData[iter_data].imag()) * (QAM[iter_const].imag() - modData[iter_data].imag())));
+                        }
+                    }
+                    demodOut[iter_data * bitsPerSym + iter_bits] = log(lkhd0 / lkhd1);
+                }
+            }
+        } else if (softOut == 2) { // Soft Output (Approx. LLR)
+            for (int iter_data = 0; iter_data < size; iter_data++) {
+                for (int iter_bits = 0; iter_bits < bitsPerSym; iter_bits++) {
+                    float lkhd0 = 1e10, lkhd1 = 1e10, tmp1, tmp2;
+                    for (int iter_const = 0; iter_const < M; iter_const++) {
+                        if (iter_const ^ int(pow(2, iter_bits)) == 0) {
+                            tmp1 = exp((-1 / (2 * noiseVar)) * ((QAM[iter_const].real() - modData[iter_data].real()) * (QAM[iter_const].real() - modData[iter_data].real()) + (QAM[iter_const].imag() - modData[iter_data].imag()) * (QAM[iter_const].imag() - modData[iter_data].imag())));
+                            if (tmp1 < lkhd0) {
+                                lkhd0 = tmp1;
+                            }
+                        } else {
+                            tmp2 = exp((-1 / (2 * noiseVar)) * ((QAM[iter_const].real() - modData[iter_data].real()) * (QAM[iter_const].real() - modData[iter_data].real()) + (QAM[iter_const].imag() - modData[iter_data].imag()) * (QAM[iter_const].imag() - modData[iter_data].imag())));
+                            if (tmp2 < lkhd1) {
+                                lkhd1 = tmp2;
+                            }
+                        }
+                    }
+                    demodOut[iter_data * bitsPerSym + iter_bits] = log(lkhd0 / lkhd1);
+                }
+            }
         }
 
         return demodOut;
     }
-
 }

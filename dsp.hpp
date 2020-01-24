@@ -68,6 +68,6 @@ namespace filter {
 
 namespace comm {
     vector<complex<float>> QAMMod(vector<int>, int M, int size);
-    vector<int> QAMDemod(vector<complex<float>>, int M, int size, int softOut);
+    vector<int> QAMDemod(vector<complex<float>>, int M, int size, int softOut, float noiseVar = 1);
 }
 

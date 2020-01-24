@@ -5,15 +5,15 @@ using namespace std;
 using namespace utils;
 using namespace basic;
 using namespace filter;
+using namespace comm;
 
 int main() {   
 
-    // vector<complex<float>> x = {{1, 2}, {2, 3}, {5, 25}};
-    vector<complex<float>> y = {{3, 9}, {4, 12}, {2, 1}, {33, 100}};
-    
-    // auto z = conv1d(x, flip(conj(y)));
+    vector<int> data = {1, 0, 0, 1, 1, 1, 0, 0};
+    vector<complex<float>> modData = QAMMod(data, 4, 8);
+    vector<int> data_hat = QAMDemod(modData, 4, 4, 1, 1);
 
-    printSeq(downSample(y, 2));
+    printSeq(data_hat);
 
     return 0;
 }
