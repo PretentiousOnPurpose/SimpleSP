@@ -64,10 +64,13 @@ namespace utils {
 namespace filter {
     vector<complex<float>> applyFIRFilter(vector<complex<float>> impResponse, vector<complex<float>> data);
     vector<complex<float>> FIRLowPass(float fp, float fs, float F, int N, int phi, string window = "rect");
+    vector<complex<float>> FIRHighPass(float fp, float fs, float F, int N, int phi, string window = "rect");
+    vector<complex<float>> FIRBandPass(float f1, float f2, float F, int N, int phi, string window = "rect");
+    vector<complex<float>> FIRBandStop(float f1, float f2, float F, int N, int phi, string window = "rect");
 };
 
 namespace comm {
     vector<complex<float>> QAMMod(vector<int>, int M, int size);
-    vector<int> QAMDemod(vector<complex<float>>, int M, int size, int softOut, float noiseVar = 1);
+    vector<float> QAMDemod(vector<complex<float>>, int M, int size, int softOut, float noiseVar = 1);
 }
 
