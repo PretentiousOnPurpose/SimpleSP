@@ -9,11 +9,11 @@ using namespace comm;
 
 int main() {   
 
-    vector<int> data = {1, 0, 0, 1};
+    vector<int> data = {1, 1, 1, 0};
 
     auto y = QAMMod(data, 16, 4);
 
-    auto data_h = QAMDemod(y, 16, 1, 1);
+    auto data_h = QAMDemod(y, 16, 1, 2);
 
     printSeq(y);
     printSeq(data_h);
